@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react'
-import { BiAperture as Icon } from 'react-icons/bi'
+import { React, useState } from 'react'
 import { MdSpaceDashboard as Dashboard } from 'react-icons/md'
 import { RiCustomerServiceFill as Customer } from 'react-icons/ri'
 import { FiSettings as Settings, FiLogOut as Logout } from 'react-icons/fi'
+import { BiMenu as Menu, BiSearch as Search, BiAperture as Icon } from 'react-icons/bi'
 import "../css/index.css"
+import Content from './Content'
 
 const Navbar = () => {
 
@@ -11,11 +12,12 @@ const Navbar = () => {
     const [customer, setCustomer] = useState(false)
     const [settings, setSettings] = useState(false)
     const [logout, setLogout] = useState(false)
+    const [toggle, setToggle] = useState(false)
 
     return (
         <>
             <div className="container">
-                <div className="navigation">
+                <div className={toggle ? 'navigation active' : 'navigation'}>
                     <ul>
                         <li>
                             <a href="#">
@@ -50,6 +52,23 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+            <div className={toggle ? 'main active' : 'main'}>
+            <div className="topbar">
+                <div className={toggle ? 'active toggle' : 'toggle'}>
+                    <Menu onClick={() => setToggle(!toggle)} />
+                </div>
+                <div className="search">
+                    <label>
+                        <input type="text" placeholder='Search here...' />
+                        <Search className='search-icon'/>
+                    </label>
+                </div>
+                <div className="user">
+                    <img src="vite.svg"/>
+                </div>
+            </div>
+            <Content/>
+        </div>
         </>
     )
 }
